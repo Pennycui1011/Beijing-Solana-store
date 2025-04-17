@@ -24,6 +24,8 @@ body {
     font-family: 'Open Sans', sans-serif;
     line-height: 1.6;
     color: var(--text-color);
+    overflow-x: hidden; /* 防止水平滚动 */
+    width: 100%;
 }
 
 /* 导航栏样式 */
@@ -215,30 +217,6 @@ body {
     color: var(--primary-color);
 }
 
-.pdf-container {
-    max-width: 1200px;
-    margin: 0 auto;
-    background: white;
-    border-radius: 10px;
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-    overflow: hidden;
-    border: 1px solid rgba(0, 0, 0, 0.05);
-    padding: 2rem;
-}
-
-.pdf-display {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
-
-.pdf-display h3 {
-    margin-bottom: 1.5rem;
-    color: var(--primary-color);
-    font-size: 1.3rem;
-    text-align: center;
-}
-
 /* 图片展示区域样式 */
 .image-gallery {
     width: 100%;
@@ -268,7 +246,8 @@ body {
     border-radius: 8px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     transition: transform 0.3s ease;
-    height: 300px;
+    height: 300px; /* 统一高度 */
+    width: 100%; /* 确保宽度一致 */
 }
 
 .gallery-item:hover {
@@ -278,7 +257,7 @@ body {
 .gallery-item img {
     width: 100%;
     height: 100%;
-    object-fit: cover;
+    object-fit: cover; /* 确保图片填充整个容器而不变形 */
     display: block;
     transition: transform 0.5s ease;
 }
@@ -343,6 +322,87 @@ body {
 
 .control-btn:hover {
     background: #e63939;
+}
+
+/* 搭配展示区样式 */
+.outfit-inspiration {
+    padding: 4rem 5%;
+    background: var(--light-bg);
+    position: relative;
+    z-index: 2;
+}
+
+.outfit-inspiration h2 {
+    text-align: center;
+    font-family: 'Montserrat', sans-serif;
+    margin-bottom: 2rem;
+    font-size: 2.2rem;
+    color: var(--primary-color);
+}
+
+.carousel-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    overflow: hidden;
+    position: relative;
+}
+
+.carousel {
+    display: flex;
+    transition: transform 0.5s ease;
+    width: 100%;
+}
+
+.carousel-item {
+    min-width: 100%;
+    position: relative;
+    height: 350px; /* 统一所有照片的高度 */
+    overflow: hidden;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    display: none;
+}
+
+.carousel-item.active {
+    display: block;
+}
+
+.carousel-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s ease;
+}
+
+.carousel-item:hover img {
+    transform: scale(1.05);
+}
+
+.item-overlay {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.8), transparent);
+    color: white;
+    padding: 2rem 1.5rem 1.5rem;
+    transform: translateY(0);
+    transition: transform 0.3s ease;
+}
+
+.carousel-item:hover .item-overlay {
+    transform: translateY(-10px);
+}
+
+.item-overlay h3 {
+    font-size: 1.5rem;
+    margin-bottom: 0.5rem;
+    font-family: 'Montserrat', sans-serif;
+}
+
+.item-overlay p {
+    font-size: 1rem;
+    opacity: 0.9;
 }
 
 /* 二维码区域样式 */
@@ -482,27 +542,27 @@ footer {
         font-size: 2.5rem;
     }
 
-    .pdf-container {
+    .hero-content p {
+        font-size: 1.1rem;
+    }
+
+    .special-offers h2,
+    .pdf-section h2,
+    .outfit-inspiration h2,
+    .qr-section h2 {
+        font-size: 1.8rem;
+    }
+
+    .offers-container {
         grid-template-columns: 1fr;
     }
 
-    .pdf-upload {
-        border-right: none;
-        border-bottom: 1px solid #eee;
+    .offer-card {
+        padding: 1.5rem;
     }
 
-    .qr-container {
-        flex-direction: column;
-        align-items: center;
-    }
-
-    .footer-content {
-        flex-direction: column;
-        text-align: center;
-    }
-
-    .social-links {
-        margin-top: 1rem;
+    .offer-image {
+        height: 180px;
     }
 
     .gallery-page {
@@ -510,123 +570,14 @@ footer {
     }
     
     .gallery-item {
-        height: 250px;
+        height: 250px; /* 在小屏幕上统一高度 */
     }
     
     .gallery-controls {
         flex-direction: column;
         gap: 15px;
     }
-}
 
-/* 搭配展示区样式 */
-.outfit-inspiration {
-    padding: 4rem 5%;
-    background: var(--light-bg);
-    position: relative;
-    z-index: 2;
-}
-
-.outfit-inspiration h2 {
-    text-align: center;
-    font-family: 'Montserrat', sans-serif;
-    margin-bottom: 2rem;
-    font-size: 2.2rem;
-    color: var(--primary-color);
-}
-
-.carousel-container {
-    max-width: 1200px;
-    margin: 0 auto;
-    overflow: hidden;
-    position: relative;
-}
-
-.carousel {
-    display: flex;
-    transition: transform 0.5s ease;
-    width: 100%;
-}
-
-.carousel-item {
-    min-width: 100%;
-    position: relative;
-    height: 350px; /* 统一所有照片的高度 */
-    overflow: hidden;
-    border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    display: none;
-}
-
-.carousel-item.active {
-    display: block;
-}
-
-.carousel-item img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    transition: transform 0.5s ease;
-}
-
-.carousel-item:hover img {
-    transform: scale(1.05);
-}
-
-.item-overlay {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    background: linear-gradient(to top, rgba(0, 0, 0, 0.8), transparent);
-    color: white;
-    padding: 2rem 1.5rem 1.5rem;
-    transform: translateY(0);
-    transition: transform 0.3s ease;
-}
-
-.carousel-item:hover .item-overlay {
-    transform: translateY(-10px);
-}
-
-.item-overlay h3 {
-    font-size: 1.5rem;
-    margin-bottom: 0.5rem;
-    font-family: 'Montserrat', sans-serif;
-}
-
-.item-overlay p {
-    font-size: 1rem;
-    opacity: 0.9;
-}
-
-/* 轮播图控制按钮 */
-.carousel-controls {
-    position: absolute;
-    bottom: 20px;
-    left: 0;
-    right: 0;
-    display: flex;
-    justify-content: center;
-    gap: 10px;
-    z-index: 10;
-}
-
-.carousel-dot {
-    width: 12px;
-    height: 12px;
-    border-radius: 50%;
-    background: rgba(255, 255, 255, 0.5);
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-}
-
-.carousel-dot.active {
-    background: var(--primary-color);
-}
-
-/* 响应式设计 */
-@media (max-width: 768px) {
     .carousel-item {
         height: 250px; /* 在小屏幕上统一高度 */
     }
@@ -641,5 +592,83 @@ footer {
     
     .item-overlay p {
         font-size: 0.9rem;
+    }
+
+    .qr-container {
+        flex-direction: column;
+        align-items: center;
+        gap: 2rem;
+    }
+
+    .qr-frame {
+        width: 180px;
+        height: 180px;
+    }
+
+    .footer-content {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .social-links {
+        margin-top: 1rem;
+    }
+
+    .social-links a {
+        margin: 0 0.5rem;
+    }
+
+    .back-to-top {
+        bottom: 1rem;
+        right: 1rem;
+        width: 35px;
+        height: 35px;
+    }
+}
+
+/* 更小屏幕的优化 */
+@media (max-width: 480px) {
+    .hero-content h1 {
+        font-size: 2rem;
+    }
+
+    .hero-content p {
+        font-size: 1rem;
+    }
+
+    .special-offers h2,
+    .pdf-section h2,
+    .outfit-inspiration h2,
+    .qr-section h2 {
+        font-size: 1.5rem;
+    }
+
+    .offer-card h3 {
+        font-size: 1.2rem;
+    }
+
+    .offer-image {
+        height: 160px;
+    }
+
+    .gallery-item {
+        height: 220px;
+    }
+
+    .carousel-item {
+        height: 220px;
+    }
+
+    .item-overlay h3 {
+        font-size: 1.2rem;
+    }
+
+    .item-overlay p {
+        font-size: 0.8rem;
+    }
+
+    .qr-frame {
+        width: 160px;
+        height: 160px;
     }
 } 
