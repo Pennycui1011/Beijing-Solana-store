@@ -367,3 +367,4 @@ document.addEventListener('DOMContentLoaded', function() {
         showPage(0);
     }
 }); 
+}); 
